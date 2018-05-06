@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>OnceIO</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="assets/css/carousel.css" rel="stylesheet">
+    <script src="http://static.runoob.com/assets/vue/1.0.11/vue.min.js"></script>
+	
+	<script src="../assets/css/mdd_styles.css"> </script>
+	<script src="../assets/js/MarkdownDeepLib.min.js"></script>
+  </head>
+<body id='app'>
+	<div>
+		{{content}}
+	</div>
+	<script>
+		var md = new MarkdownDeep.Markdown();
+		md.ExtraMode = true;
+		md.SafeMode = false;
+		var output = md.Transform('**hello**');
+		console.log(output);
+		var vue = new Vue({
+			el:'#app',
+			data: {
+				content: output
+        	}
+		});
+	</script>
+</body>
+</html>
