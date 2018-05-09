@@ -39,16 +39,16 @@
               header="onceio-servlet"
               text-variant="white"
               class="text-center">
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <p class="card-text">OnceIO结合servlet-api 3.0 创建Web应用，最小依赖版本。</p>
           <div slot="footer">
-            <b-btn variant="info" href="https://github.com/william-xian/onceio-demo-test.git">Servlet Demo</b-btn>
+            <b-btn variant="info" href="https://github.com/william-xian/onceio-demo-test.git">ServletAPI Demo</b-btn>
           </div>
       </b-card>
       <b-card bg-variant="dark"
               header="onceio-vertx"
               text-variant="white"
               class="text-center">
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <p class="card-text">OnceIO与vert.x完美结合，基于时间驱动，简单高效。今后将大力支持并晚上该项目。推荐使用该模板做web服务。</p>
           <div slot="footer">
             <b-btn variant="info" href="https://github.com/william-xian/onceio-vertx-demo.git">Vertx Demo</b-btn>
           </div>
@@ -57,7 +57,7 @@
               header="onceio-springboot"
               text-variant="white"
               class="text-center">
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <p class="card-text">OnceIO与SpringBoot结合， 为相应广大用户对SpringBoot需求特意打造。</p>
           <div slot="footer">
             <b-btn variant="info" href="https://github.com/william-xian/onceio-spring-demo.git">SpringBoot Demo</b-btn>
           </div>
