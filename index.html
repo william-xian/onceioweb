@@ -2,82 +2,12 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
-
-    <title>OnceIO</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="assets/css/carousel.css" rel="stylesheet">
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
-	<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link type="favicon" rel="shortcut icon" href="static/favicon.ico" />
+    <title>onceio</title>
   </head>
-<body>
-
-<div id="app">
-    <header>
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#/user/login">OnceIO</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" v-on:click="home">首页</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" v-on:click="docs">文档</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">打赏</a>
-            </li>
-          </ul>
-          <form class="form-inline mt-2 mt-md-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
-        </div>
-      </nav>
-    </header>
-  <!-- 路由出口 -->
-  <!-- 路由匹配到的组件将渲染在这里 -->
-  <div v-html="content"></div>
-  <span>{{home()}}</span>
-
-      <!-- FOOTER -->
-  <footer class="container">
-    <p class="float-right"><a href="#">Back to top</a></p>
-    <p>&copy; onceio.top</p>
-  </footer>
-</div>
-
-	<script>
-		new Vue({
-  		el: '#app',
-  		data: {
-    		content: 'Loading...'
-		  },
-  		methods: {
-    		home: function () {
-    			var self = this;
-				$.get('view/home.html', function(data,status){
-					self.content = data;
-				});
-    		},
-    		docs: function () {
-    			var self = this;
-				$.get('view/docs/docs.html', function(data,status){
-					self.content = data;
-				});
-    		}
-  		}
-		});
-	</script>
-</body>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
 </html>
