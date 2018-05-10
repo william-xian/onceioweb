@@ -1,10 +1,13 @@
 <template>
 	<div class='oio-container'>
 		<div class="oio-body">
-			<b-navbar toggleable="md" type="info" variant="dark">
+
+			<b-navbar toggleable="md" type="dark" variant="dark">
+
 				<b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-				<b-navbar-brand href="#">
-					<img src="./../assets/logo.png" height="30">
+				
+        <b-navbar-brand href="#">
+					<img src="./../assets/logo.png" height="30" class="d-inline-block align-top" alt="OnceIO">
 				</b-navbar-brand>
 				<b-collapse is-nav id="nav_collapse">
 					<b-navbar-nav>
@@ -32,7 +35,8 @@
 			</b-navbar>
 			<router-view/>
 		</div>
-    <footer>&copy;Copyright 2018 OnceIO, Inc. All Rights Reserved.
+    <footer style="padding-top:1em;">
+      &copy;Copyright 2018 OnceIO, Inc. All Rights Reserved.
       <a href="#/terms">Terms of Use</a>
     </footer>
 	</div>
@@ -50,11 +54,24 @@ export default {
 </script>
 
 <style scoped>
+
+.navbar-toggler-icon {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: middle;
+  content: "";
+  background: no-repeat center center;
+  background-color: #ff00ff;
+  background-size: 100% 100%;
+}
+
 .oio-container{width:100%;min-height:100%;position:relative;}
 .oio-body{padding-bottom:50px;}
+
 footer{
 	width: 100%;
-	height: 1.5em;
+	height: 4em;
 	position:fixed;
 	bottom:0px;left:0px;
 	background: #333;
