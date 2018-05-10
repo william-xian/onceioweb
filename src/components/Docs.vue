@@ -1,9 +1,6 @@
 <template>
-	<div style="text-align: center;">
-		<h2>
-		小马正在玩命书写中。如果你打赏一下他会跑的更快。
-		</h2>
-		<b-btn href="#/terms">打赏</b-btn>
+	<div>
+		<Markdown dir="/static/docs/" src="01-快速开始.md" files='01-快速开始.md;02-数据库操作.md'></Markdown>
 	</div>
 </template>
 
