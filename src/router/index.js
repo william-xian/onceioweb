@@ -23,7 +23,6 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'OnceIO',
       component: AppRoot,
 	  children : [
 		{
