@@ -4,9 +4,10 @@
 <b-row>
 <b-col class="col-md-2">
 <b-nav vertical class="col-md-12">
-	<ol v-for="item in items">
-		<li v-on:click="open((dir+item))"> {{item}} </li>
-	</ol>
+<div>
+  <TreeNode :model="treeData" :callback="open"></TreeNode>
+</div>
+
 </b-nav>
 </b-col>
 <b-col class="col-md-10">
@@ -20,28 +21,41 @@
 
 <script>
 import VueMarkdown from 'vue-markdown';
+import TreeNode from '@/components/TreeNode'
 export default {
   name: 'Markdown',
   props: ['dir','files','src'],
   data () {
   	var d = {
-  		content : '',
-  		items : this.files.split(';')
-  	};
-  	return d;
- },
- components: {
- 	VueMarkdown
- },methods: {
- 	open:function(src) {
- 		var self = this;
-	  	this.$http.get(src)
+  		treeData: {},
+  		content : ''
+  	}
+
+	this.$http.get(this.dir+'config.json')
 	  		.then(function(res){ 
-	          self.content =  res.data;
+	          d.treeData =  JSON.parse(res.bodyText);
 			},
 			function(res){  
 	    });
+  	return d;
+ },
+ components: {
+ 	VueMarkdown,TreeNode
+ },methods: {
+ 	open:function(src) {
+ 		if(src != null && src != "")
+ 		{
+	 		var self = this;
+		  	this.$http.get(this.dir+src)
+		  		.then(function(res){ 
+		          self.content =  res.data;
+				},
+				function(res){  
+		    });
+ 		}
  	}
  }
 }
 </script>
+
+
