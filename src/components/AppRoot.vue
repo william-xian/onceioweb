@@ -7,7 +7,7 @@
 				<b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 				
         <b-navbar-brand href="#">
-					<img src="./../assets/logo.png" height="30" class="d-inline-block align-top" alt="OnceIO">
+					<img src="/static/img/logo.svg" height="30" class="d-inline-block align-top" alt="OnceIO">
 				</b-navbar-brand>
 				<b-collapse is-nav id="nav_collapse">
 					<b-navbar-nav>
