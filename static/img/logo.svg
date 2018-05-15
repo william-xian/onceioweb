@@ -3,17 +3,17 @@
 
  <g>
   <title>background</title>
-  <rect fill="#fff" id="canvas_background" height="202" width="202" y="-1" x="-1"/>
-  <g display="none" id="canvasGrid">
-   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%" id="svg_4"/>
+  <rect x="-1" y="-1" width="202" height="202" id="canvas_background" fill="none"/>
+  <g id="canvasGrid" display="none">
+   <rect id="svg_4" width="100%" height="100%" x="0" y="0" stroke-width="0" fill="url(#gridpattern)"/>
   </g>
  </g>
  <g>
   <title>Layer 1</title>
-  <ellipse stroke-opacity="0" stroke="#0f0f00" ry="94" rx="78.81006" id="svg_1" cy="100" cx="100" stroke-width="1.5" fill="#ff7f00"/>
-  <ellipse stroke-opacity="0" stroke="#0f0f00" ry="77" rx="60.58939" id="svg_2" cy="93" cx="100" stroke-width="1.5" fill="#ffffff"/>
-  <ellipse stroke="#0f0f00" ry="38.63262" rx="35.91201" id="svg_3" cy="73.52441" cx="100" stroke-opacity="0" stroke-width="1.5" fill="#0000ff"/>
-  <rect id="svg_5" height="15" width="60" y="135.75002" x="70" stroke-opacity="0" stroke-width="1.5" stroke="#0f0f00" fill="#ff0000"/>
-  <ellipse stroke="#0f0f00" ry="27.5625" rx="24.75" id="svg_6" cy="79.17984" cx="100" stroke-opacity="0" stroke-width="1.5" fill="#ffffff"/>
+  <ellipse fill="#ff7f00" stroke-width="1.5" cx="100" cy="100" id="svg_1" rx="78.81006" ry="94" stroke="#0f0f00" stroke-opacity="0"/>
+  <ellipse fill="#ffffff" stroke-width="1.5" cx="100" cy="93" id="svg_2" rx="60.58939" ry="77" stroke="#0f0f00" stroke-opacity="0"/>
+  <ellipse fill="#0000ff" stroke-width="1.5" stroke-opacity="0" cx="100" cy="73.52441" id="svg_3" rx="35.91201" ry="38.63262" stroke="#0f0f00"/>
+  <rect fill="#ff0000" stroke="#0f0f00" stroke-width="1.5" stroke-opacity="0" x="70" y="135.75002" width="60" height="15" id="svg_5"/>
+  <ellipse fill="#ffffff" stroke-width="1.5" stroke-opacity="0" cx="100" cy="79.17984" id="svg_6" rx="24.75" ry="27.5625" stroke="#0f0f00"/>
  </g>
 </svg>
