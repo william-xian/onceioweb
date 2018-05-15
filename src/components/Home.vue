@@ -6,7 +6,7 @@
       <img src="/static/img/logo.svg" height="100" class="margin: 0 auto;"/>
     </div>
     <div style="text-align: center;">
-      <h1><font color="orange">O</font>nce<font color="red">I</font><font color="blue">O</font></h1>
+      <h1><font color="#ff7f00">O</font>nce<font color="red">I</font><font color="blue">O</font></h1>
     </div>
     <hr class="my-2"/>
     <div style="text-indent:2em; margin:1em;">
