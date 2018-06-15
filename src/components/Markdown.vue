@@ -30,14 +30,16 @@ export default {
   		treeData: {},
   		content : ''
   	}
-
+  	return d;
+ },
+ mounted() {
+	var d = this;
 	this.$http.get(this.dir+'config.json')
 	  		.then(function(res){ 
 	          d.treeData =  JSON.parse(res.bodyText);
 			},
 			function(res){  
 	    });
-  	return d;
  },
  components: {
  	VueMarkdown,TreeNode

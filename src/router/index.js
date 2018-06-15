@@ -3,6 +3,10 @@ import Router from 'vue-router'
 import BootstrapVue from 'bootstrap-vue'
 import VueResource from 'vue-resource';
 
+import iView from 'iview';
+import 'iview/dist/styles/iview.css';
+
+
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
@@ -12,12 +16,18 @@ import Docs from '@/components/Docs'
 import Terms from '@/components/Terms'
 import Markdown from '@/components/Markdown'
 
+import ApiDoc from '@/components/ApiDoc'
+import ApiDocs from '@/components/ApiDocs'
+
 
 Vue.use(Router)
 Vue.use(BootstrapVue);
+Vue.use(iView);
 Vue.use(VueResource) 
 
 Vue.component('Markdown', Markdown);
+Vue.component('ApiDoc', ApiDoc);
+Vue.component('ApiDocs', ApiDocs);
 
 export default new Router({
   routes: [
@@ -39,6 +49,11 @@ export default new Router({
 			path: '/terms',
 			name: 'Terms',
 			component: Terms
+		},
+		{
+			path: '/apidoc',
+			name: 'ApiDoc',
+			component: ApiDocs
 		}
 
 	  ]
