@@ -19,7 +19,7 @@ import AppRoot from '@/components/AppRoot'
 import Home from '@/components/Home'
 import Docs from '@/components/Docs'
 import Terms from '@/components/Terms'
-import Markdown from '@/components/Markdown'
+import MBook from '@/components/MBook'
 
 import ApiDoc from '@/components/ApiDoc'
 import ApiDocs from '@/components/ApiDocs'
@@ -31,7 +31,7 @@ Vue.use(ElementUI);
 Vue.use(BootstrapVue);
 Vue.use(VueResource) 
 
-Vue.component('Markdown', Markdown);
+Vue.component('MBook', MBook);
 Vue.component('ApiDoc', ApiDoc);
 Vue.component('ApiDocs', ApiDocs);
 

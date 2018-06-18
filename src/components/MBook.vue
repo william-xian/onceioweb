@@ -6,7 +6,7 @@
 <b-nav vertical class="col-md-12">
 <div>
   <label>{{book.name}}</label>
-  <el-tree :data="book.children" :props="defaultProps" @node-click="open"></el-tree>
+  <el-tree :data="book.children" :props="defaultProps" node-key="src" :default-checked-keys="['00.伊始.md']" @node-click="open"></el-tree>
 </div>
 
 </b-nav>
@@ -21,9 +21,10 @@
 </template>
 
 <script>
+import axios from 'axios';
 import VueMarkdown from 'vue-markdown';
 export default {
-  name: 'Markdown',
+  name: 'MBook',
   props: ['dir','files','src'],
   data () {
   	var d = {
@@ -37,12 +38,17 @@ export default {
   	return d;
  },
  mounted() {
-	var d = this;
-	this.$http.get(this.dir+'config.json')
+	var self = this;
+	axios.get(this.dir+'config.json')
 	  		.then(function(res){ 
-	          d.book =  JSON.parse(res.bodyText);
-			},
-			function(res){  
+	          self.book =  res.data;
+			}).then(function(){
+
+        axios.get(self.dir+self.book.children[0].src)
+          .then(function(res){ 
+              self.content =  res.data;
+        });
+
 	    });
  },
  components: {
@@ -52,8 +58,8 @@ export default {
  		var src =  item.src;
  		if(src != null && src != "")
  		{
-	 		var self = this;
-		  	this.$http.get(this.dir+src)
+      var self = this;
+		  	axios.get(self.dir+src)
 		  		.then(function(res){ 
 		          self.content =  res.data;
 				},
