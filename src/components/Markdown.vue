@@ -5,7 +5,8 @@
 <b-col class="col-md-2">
 <b-nav vertical class="col-md-12">
 <div>
-  <TreeNode :model="treeData" :callback="open"></TreeNode>
+  <label>{{book.name}}</label>
+  <el-tree :data="book.children" :props="defaultProps" @node-click="open"></el-tree>
 </div>
 
 </b-nav>
@@ -21,14 +22,17 @@
 
 <script>
 import VueMarkdown from 'vue-markdown';
-import TreeNode from '@/components/TreeNode'
 export default {
   name: 'Markdown',
   props: ['dir','files','src'],
   data () {
   	var d = {
-  		treeData: {},
-  		content : ''
+  		book: {},
+  		content : '',
+  		defaultProps: {
+          children: 'children',
+          label: 'name'
+        }
   	}
   	return d;
  },
@@ -36,15 +40,16 @@ export default {
 	var d = this;
 	this.$http.get(this.dir+'config.json')
 	  		.then(function(res){ 
-	          d.treeData =  JSON.parse(res.bodyText);
+	          d.book =  JSON.parse(res.bodyText);
 			},
 			function(res){  
 	    });
  },
  components: {
- 	VueMarkdown,TreeNode
+ 	VueMarkdown
  },methods: {
- 	open:function(src) {
+ 	open:function(item) {
+ 		var src =  item.src;
  		if(src != null && src != "")
  		{
 	 		var self = this;

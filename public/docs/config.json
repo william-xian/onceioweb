@@ -1,7 +1,6 @@
       
 {
     "name":"OnceIO",
-    "src" : "00.伊始.md",
     "children":[
         {
             "name":"伊始",
@@ -17,21 +16,21 @@
             "children":[
                         {
                             "name":"定义表",
-            				"src":"02.1.定义表.md"
+                            "src":"02.1.定义表.md"
                         },
                         {
                             "name":"CURD",
                             "src":"02.2.2.CURD.md",
                             "children": [
                               {
-	                            "name":"数据操作基础API",
-        	                    "src":"02.2.1.数据操作基础API.md"
-			      },
+                                "name":"数据操作基础API",
+                                "src":"02.2.1.数据操作基础API.md"
+                  },
                               {
-	                            "name":"CURD",
-        	                    "src":"02.2.2.CURD.md"
-			      }
-			    ]
+                                "name":"CURD",
+                                "src":"02.2.2.CURD.md"
+                  }
+                ]
                         },
                         {
                             "name":"多表关联操作",
@@ -57,4 +56,3 @@
         }
     ]
 }
-

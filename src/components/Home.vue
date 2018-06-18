@@ -3,7 +3,7 @@
 
   <div>
     <div style="text-align: center;">
-      <img src="/static/img/logo.svg" height="100" class="margin: 0 auto;"/>
+      <img src="/img/logo.svg" height="100" class="margin: 0 auto;"/>
     </div>
     <div style="text-align: center;">
       <h1><font color="#ff7f00">O</font>nce<font color="red">I</font><font color="blue">O</font></h1>
@@ -18,6 +18,9 @@
       </li>
       <li>
           业务级框架：别出心裁国际化处理方式， 不用再为全局名而头疼，不再为简单的业务折腾数个配置文件，让Coding更加流畅。
+      </li>
+      <li>
+          业务级框架：MVC,表单验证，接口文档三合一。以其独特的设计诠释大道至简。
       </li>
       <li>
           为变更而设计：独特的SQL拼写方式，告别硬代码，业务变更引起的表结构变更所产生的一系列问题都将在编译期暴露出来。当被问及是否将与某表相关的业务全部更改完毕与否时，纵然百万行代码，也可以轻松的说:Yes，I have done.
