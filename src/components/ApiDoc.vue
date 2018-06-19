@@ -2,12 +2,9 @@
   <div>
     <b-row>
 <b-col class="col-md-2">
-<b-nav vertical class="col-md-12">
 <div>
   <el-tree :data="apitree" :props="treecnf" @node-click="showApi"></el-tree>
 </div>
-
-</b-nav>
 </b-col>
 <b-col class="col-md-10">
   <div>
@@ -98,7 +95,11 @@ export default {
       var e = resp.data[ei];
       e.api=e.api;
       var api =  {};
-      api.name=e.api;
+      if(e.api == '') {
+         api.name="/";
+      }else {
+         api.name=e.api;
+      }
       api.subapi = [];
       e.subapi.forEach(function(item) {
         var se = item;

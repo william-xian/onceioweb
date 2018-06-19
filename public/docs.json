@@ -458,6 +458,45 @@
         "name":"cn.xian.vertxdemo.holder.UserWalletHolder",
         "api":"/userwallet"
     },
+    "cn.xian.vertxdemo.api.ResouceApi":{
+        "brief":"",
+        "subapi":[
+            {
+                "brief":"",
+                "methods":[
+                    "GET"
+                ],
+                "methodName":"staticResource",
+                "api":"/s/*",
+                "params":{
+                    "arg0":{
+
+                    }
+                },
+                "returnType":{
+                    ":type":"void"
+                }
+            },
+            {
+                "brief":"",
+                "methods":[
+                    "POST"
+                ],
+                "methodName":"upload",
+                "api":"/upload",
+                "params":{
+                    "arg0":{
+
+                    }
+                },
+                "returnType":{
+                    ":type":"void"
+                }
+            }
+        ],
+        "name":"cn.xian.vertxdemo.api.ResouceApi",
+        "api":""
+    },
     "top.onceio.core.beans.OI18nHolder":{
         "brief":"",
         "subapi":[
@@ -885,71 +924,6 @@
         ],
         "name":"cn.xian.vertxdemo.holder.AccountHolder",
         "api":"/account"
-    },
-    "cn.xian.vertxdemo.api.UserApi":{
-        "brief":"",
-        "subapi":[
-            {
-                "brief":"",
-                "methods":[
-                    "GET"
-                ],
-                "methodName":"conf",
-                "api":"/config/",
-                "params":{
-                    "arg1":{
-
-                    },
-                    "arg":{
-                        ":type":"java.lang.String",
-                        "source":"Param"
-                    }
-                },
-                "returnType":{
-                    ":type":"void"
-                }
-            },
-            {
-                "brief":"",
-                "methods":[
-                    "GET"
-                ],
-                "methodName":"conf",
-                "api":"/send/{msg}",
-                "params":{
-                    "msg":{
-                        ":type":"java.lang.String",
-                        "source":"Param"
-                    }
-                },
-                "returnType":{
-                    ":type":"java.lang.String"
-                }
-            },
-            {
-                "brief":"",
-                "methods":[
-                    "GET"
-                ],
-                "methodName":"signup",
-                "api":"/signup/{account}",
-                "params":{
-                    "passwd":{
-                        ":type":"java.lang.String",
-                        "source":"Param"
-                    },
-                    "account":{
-                        ":type":"java.lang.String",
-                        "source":"Param"
-                    }
-                },
-                "returnType":{
-                    ":type":"cn.xian.vertxdemo.model.entity.Account"
-                }
-            }
-        ],
-        "name":"cn.xian.vertxdemo.api.UserApi",
-        "api":"/user"
     },
     "model":{
         "cn.xian.vertxdemo.model.entity.UserWallet":{
