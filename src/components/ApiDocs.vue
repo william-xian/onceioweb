@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<ApiDoc url="/docs.json" target=""></ApiDoc>
+		<ApiDoc url="/rs/docs.json" target=""></ApiDoc>
 	</div>
 </template>
 

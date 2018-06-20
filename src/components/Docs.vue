@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<MBook dir="/docs/" src="01-快速开始.md" files='01-快速开始.md;02-数据库操作.md'></MBook>
+		<MBook dir="/rs/docs/" src="01-快速开始.md" files='01-快速开始.md;02-数据库操作.md'></MBook>
 	</div>
 </template>
 

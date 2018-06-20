@@ -1,7 +1,7 @@
 <template>
 <div>
     <div style="text-align: center;">
-      <img src="/img/qrcode_wechat_fee.jpg" height="400" class="margin: 0 auto;"/>
+      <img src="/rs/img/qrcode_wechat_fee.jpg" height="400" class="margin: 0 auto;"/>
     </div>
     <div style="text-align: center;">
       <h6>哪怕是一分钱也是一种消费态度。你是否相信有免费的晚餐。</h6>

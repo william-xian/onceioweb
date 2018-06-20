@@ -3,7 +3,7 @@
 
   <div>
     <div style="text-align: center;">
-      <img src="/img/logo.svg" height="100" class="margin: 0 auto;"/>
+      <img src="/rs/img/logo.svg" height="100" class="margin: 0 auto;"/>
     </div>
     <div style="text-align: center;">
       <h1><font color="#ff7f00">O</font>nce<font color="red">I</font><font color="blue">O</font></h1>
