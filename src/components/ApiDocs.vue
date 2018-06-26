@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<ApiDoc url="/rs/docs.json" target=""></ApiDoc>
+		<ApiDoc :url="url" target=""></ApiDoc>
 	</div>
 </template>
 
@@ -9,7 +9,7 @@ export default {
   name: 'ApiDocs',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      url: '/rs/docs.json'
     }
   }
 }

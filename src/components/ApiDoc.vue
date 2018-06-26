@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-row>
+<b-row>
 <b-col class="col-md-2">
 <div>
   <el-tree :data="apitree" :props="treecnf" @node-click="showApi"></el-tree>
@@ -75,6 +75,7 @@ export default {
   props: ['url','target'],
   data() {
 	return {
+          apiurl:'',
           apitree: [],
           treecnf: {
             children: 'subapi',
@@ -85,31 +86,8 @@ export default {
         }
   },
   mounted() {
-	var self = this;
-  this.group = this.target;
-	axios.get(this.url).then(function(resp) {
-		self.model = resp.data.model;
-		delete resp.data['model'];
-		self.apis= resp.data;
-    for(var ei in resp.data) {
-      var e = resp.data[ei];
-      e.api=e.api;
-      var api =  {};
-      if(e.api == '') {
-         api.name="/";
-      }else {
-         api.name=e.api;
-      }
-      api.subapi = [];
-      e.subapi.forEach(function(item) {
-        var se = item;
-        se.name =  item.methods[0] + " - " + e.api + "" + item.api;
-        se.api=e.api+item.api;
-        api.subapi.push(se);
-      });
-      self.apitree.push(api);
-    }
-  });	
+    this.apiurl = this.url;
+    this.$options.methods.fresh.bind(this)();
   },
   methods: {
     showApi: function(sa) {
@@ -138,6 +116,34 @@ export default {
 
         }while(true);
       }
+    },
+    fresh : function() {
+      var self = this;
+      this.group = this.target;
+      axios.get(this.apiurl).then(function(resp) {
+        self.model = resp.data.model;
+        delete resp.data['model'];
+        self.apis= resp.data;
+        self.apitree = [];
+        for(var ei in resp.data) {
+          var e = resp.data[ei];
+          e.api=e.api;
+          var api =  {};
+          if(e.api == '') {
+             api.name="/";
+          }else {
+             api.name=e.api;
+          }
+          api.subapi = [];
+          e.subapi.forEach(function(item) {
+            var se = item;
+            se.name =  item.methods[0] + " - " + e.api + "" + item.api;
+            se.api=e.api+item.api;
+            api.subapi.push(se);
+          });
+          self.apitree.push(api);
+        }
+      }); 
     },
     submit: function(data) {
       var d = document.getElementById("frm-params");

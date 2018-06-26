@@ -28,8 +28,9 @@
           <template slot="button-content">
             <em>Extra</em>
           </template>
+          <b-dropdown-item @click="showModal">注册</b-dropdown-item>
           <b-dropdown-item href="#">Profile</b-dropdown-item>
-          <b-dropdown-item href="#">Signout</b-dropdown-item>
+          <b-dropdown-item href="/user/signout">退出</b-dropdown-item>
           </b-nav-item-dropdown>
           </b-navbar-nav>
 
@@ -41,6 +42,36 @@
       &copy;Copyright 2018 OnceIO, Inc. All Rights Reserved.
       <a href="#/terms">Terms of Use</a>
     </footer>
+
+<div>
+
+    <b-modal ref="myModalRef" hide-footer title="登录注册">
+      <div class="d-block text-center">
+        <b-form>
+        <b-row>
+          <b-col sm="2"><label for="input-default">账户:</label></b-col>
+          <b-col sm="10">
+            <b-form-input id="input-default" type="text" placeholder="输入账户"></b-form-input>
+          </b-col>
+        </b-row>
+
+        <b-row>
+          <b-col sm="2"><label for="input-default">密码:</label></b-col>
+          <b-col sm="10">
+            <b-form-input id="input-default" type="password" placeholder="输入密码"></b-form-input>
+          </b-col>
+        </b-row>
+
+        <a class="btn btn-info" href="/user/signin">登录</a>
+        <a class="btn btn-info" href="/user/signup">注册</a>
+        </b-form>
+      </div>
+
+      <b-btn class="mt-3" block @click="hideModal">关闭</b-btn>
+    </b-modal>
+</div>
+
+
   </div>
 </template>
 
@@ -50,6 +81,14 @@ export default {
   data () {
     return {
       msg: 'Welcome to OnceIO!'
+    }
+  },
+  methods: {
+    showModal () {
+      this.$refs.myModalRef.show()
+    },
+    hideModal () {
+      this.$refs.myModalRef.hide()
     }
   }
 }

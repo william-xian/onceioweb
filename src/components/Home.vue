@@ -66,6 +66,9 @@
           </div>
       </b-card>
     </b-card-group>
+    <hr/>
+    <wb:like appkey="shTrZ">OnceIO</wb:like>
+    <hr/>
 </div>
 
 </template>
