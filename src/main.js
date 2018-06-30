@@ -22,6 +22,10 @@ import Terms from '@/components/Terms'
 import MBook from '@/components/MBook'
 
 import ApiDoc from '@/components/ApiDoc'
+
+import MVDItem from '@/components/MVDItem'
+import MVD from '@/components/MVD'
+
 import ApiDocs from '@/components/ApiDocs'
 
 Vue.config.productionTip = false
@@ -34,6 +38,8 @@ Vue.use(VueResource)
 Vue.component('MBook', MBook);
 Vue.component('ApiDoc', ApiDoc);
 Vue.component('ApiDocs', ApiDocs);
+Vue.component('MVDItem',MVDItem);
+Vue.component('MVD',MVD);
 
 Vue.use(VueRouter);
 Vue.use(App);
@@ -65,6 +71,11 @@ let router = new VueRouter({
             path: '/apidoc',
             name: 'ApiDoc',
             component: ApiDocs
+        },
+        {
+            path: '/mvd',
+            name: 'MVD',
+            component: MVD
         }
 
       ]
