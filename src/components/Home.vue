@@ -32,6 +32,9 @@
     <hr class="my-2"/>
     <div style="text-align: center;">
       <b-btn variant="primary" href="#/docs">Docs</b-btn>
+      &nbsp;&nbsp;
+      <a href="http://service.weibo.com/share/share.php?appkey=shTrZ&title=OnceIO&url=&searchPic=false&style=simple" target="_blank">
+      分享<img src="https://tva2.sinaimg.cn/crop.0.0.179.179.50/61ecce97tw1ednir6uqxxj2050052mx7.jpg" alt="微博"/></a>
     </div>
   </div>
 
@@ -66,9 +69,6 @@
           </div>
       </b-card>
     </b-card-group>
-    <hr/>
-    <wb:like appkey="shTrZ">OnceIO</wb:like>
-    <hr/>
 </div>
 
 </template>

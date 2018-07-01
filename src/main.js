@@ -24,6 +24,8 @@ import MBook from '@/components/MBook'
 import ApiDoc from '@/components/ApiDoc'
 import ApiDocs from '@/components/ApiDocs'
 
+import Signin from '@/components/Signin'
+
 Vue.config.productionTip = false
 
 Vue.use(ElementUI);
@@ -34,6 +36,7 @@ Vue.use(VueResource)
 Vue.component('MBook', MBook);
 Vue.component('ApiDoc', ApiDoc);
 Vue.component('ApiDocs', ApiDocs);
+Vue.component('Signin',Signin)
 
 Vue.use(VueRouter);
 Vue.use(App);
@@ -65,7 +68,13 @@ let router = new VueRouter({
             path: '/apidoc',
             name: 'ApiDoc',
             component: ApiDocs
+        },
+        {
+            path: '/signin',
+            name: 'Signin',
+            component: Signin
         }
+
 
       ]
 

@@ -67,8 +67,8 @@
         </b-row>
         <b-row class="d-block text-center">
           <span>其他账号登录</span>
-          <a class="btn btn-default" :href="weiboAuthUrl"><img width="32px" src="https://tva2.sinaimg.cn/crop.0.0.179.179.50/61ecce97tw1ednir6uqxxj2050052mx7.jpg" class="img-circle"></a>
-          <a class="btn btn-default" :href="alipayAuthUrl"><img width="32px" src="https://t.alipayobjects.com/images/rmsweb/T1Fb0iXnJiXXXXXXXX.png" class="img-circle"></a>
+          <a class="btn btn-default" :href="weiboAuthUri"><img width="32px" src="https://tva2.sinaimg.cn/crop.0.0.179.179.50/61ecce97tw1ednir6uqxxj2050052mx7.jpg" class="img-circle"></a>
+          <a class="btn btn-default" :href="alipayAuthUri"><img width="32px" src="https://t.alipayobjects.com/images/rmsweb/T1Fb0iXnJiXXXXXXXX.png" class="img-circle"></a>
         </b-row>
         </b-form>
       </div>
@@ -84,17 +84,18 @@ export default {
   name: 'AppRoot',
   data () {
     return {
-      alipayAuthUril:"",
-      weiboAuthUril:""
+      baseUrl:"http://www.onceio.top",
+      alipayAuthUri:"",
+      weiboAuthUri:""
     }
   },
   mounted() {
     var self = this;
-    this.$http.get('/alipay/authurl').then(function(resp){
-      self.alipayAuthUril = resp;
+    this.$http.get(self.baseUrl+'/alipay/authurl').then(function(resp){
+      self.alipayAuthUri = resp.body;
     });
-    this.$http.get('/weibo/authurl').then(function(resp){
-      self.weiboAuthUril = resp;
+    this.$http.get(self.baseUrl+'/weibo/authurl').then(function(resp) {
+      self.weiboAuthUri = resp.body;
     });
   },
   methods: {
@@ -126,7 +127,7 @@ export default {
 
 footer{
   width: 100%;
-  height: 4em;
+  height: 3em;
   position:fixed;
   bottom:0px;left:0px;
   background: #333;
