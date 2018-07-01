@@ -26,11 +26,11 @@
           <b-nav-item-dropdown right>
           <!-- Using button-content slot -->
           <template slot="button-content">
-            <em>Extra</em>
+            <em>...</em>
           </template>
-          <b-dropdown-item @click="showModal">注册</b-dropdown-item>
-          <b-dropdown-item href="#">Profile</b-dropdown-item>
-          <b-dropdown-item href="/user/signout">退出</b-dropdown-item>
+          <b-dropdown-item @click="showModal">登录</b-dropdown-item>
+          <b-dropdown-item href="#/user/signout">退出</b-dropdown-item>
+          <b-dropdown-item href="#/user/profile">个人信息</b-dropdown-item>
           </b-nav-item-dropdown>
           </b-navbar-nav>
 
@@ -61,13 +61,17 @@
             <b-form-input id="input-default" type="password" placeholder="输入密码"></b-form-input>
           </b-col>
         </b-row>
-
-        <a class="btn btn-info" href="/user/signin">登录</a>
-        <a class="btn btn-info" href="/user/signup">注册</a>
+        <b-row class="d-block text-center">
+          <a class="btn btn-info" href="/user/signin">登录</a>
+          <a class="btn btn-info" href="/user/signup">注册</a>
+        </b-row>
+        <b-row class="d-block text-center">
+          <span>其他账号登录</span>
+          <a class="btn btn-default" :href="weiboAuthUrl"><img width="32px" src="https://tva2.sinaimg.cn/crop.0.0.179.179.50/61ecce97tw1ednir6uqxxj2050052mx7.jpg" class="img-circle"></a>
+          <a class="btn btn-default" :href="alipayAuthUrl"><img width="32px" src="https://t.alipayobjects.com/images/rmsweb/T1Fb0iXnJiXXXXXXXX.png" class="img-circle"></a>
+        </b-row>
         </b-form>
       </div>
-
-      <b-btn class="mt-3" block @click="hideModal">关闭</b-btn>
     </b-modal>
 </div>
 
@@ -80,8 +84,18 @@ export default {
   name: 'AppRoot',
   data () {
     return {
-      msg: 'Welcome to OnceIO!'
+      alipayAuthUril:"",
+      weiboAuthUril:""
     }
+  },
+  mounted() {
+    var self = this;
+    this.$http.get('/alipay/authurl').then(function(resp){
+      self.alipayAuthUril = resp;
+    });
+    this.$http.get('/weibo/authurl').then(function(resp){
+      self.weiboAuthUril = resp;
+    });
   },
   methods: {
     showModal () {
