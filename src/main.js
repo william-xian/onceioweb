@@ -22,6 +22,10 @@ import Terms from '@/components/Terms'
 import MBook from '@/components/MBook'
 
 import ApiDoc from '@/components/ApiDoc'
+
+import MVDItem from '@/components/MVDItem'
+import MVD from '@/components/MVD'
+
 import ApiDocs from '@/components/ApiDocs'
 
 import Signin from '@/components/Signin'
@@ -37,6 +41,8 @@ Vue.component('MBook', MBook);
 Vue.component('ApiDoc', ApiDoc);
 Vue.component('ApiDocs', ApiDocs);
 Vue.component('Signin',Signin)
+Vue.component('MVDItem',MVDItem);
+Vue.component('MVD',MVD);
 
 Vue.use(VueRouter);
 Vue.use(App);
@@ -73,6 +79,11 @@ let router = new VueRouter({
             path: '/signin',
             name: 'Signin',
             component: Signin
+	},
+	{
+            path: '/mvd',
+            name: 'MVD',
+            component: MVD
         }
 
 
