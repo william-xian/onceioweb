@@ -30,6 +30,8 @@ import ApiDocs from '@/components/ApiDocs'
 
 import Signin from '@/components/Signin'
 
+import SignupCallback from '@/components/SignupCallback'
+
 Vue.config.productionTip = false
 
 Vue.use(ElementUI);
@@ -43,6 +45,7 @@ Vue.component('ApiDocs', ApiDocs);
 Vue.component('Signin',Signin)
 Vue.component('MVDItem',MVDItem);
 Vue.component('MVD',MVD);
+Vue.component('SignupCallback',SignupCallback);
 
 Vue.use(VueRouter);
 Vue.use(App);
@@ -57,6 +60,11 @@ let router = new VueRouter({
       children : [
         {
             path: '/',
+            name: 'Home',
+            component: Home
+        },
+        {
+            path: '/callback/:platform',
             name: 'Home',
             component: Home
         },
@@ -79,11 +87,16 @@ let router = new VueRouter({
             path: '/signin',
             name: 'Signin',
             component: Signin
-	},
-	{
+        },
+        {
             path: '/mvd',
             name: 'MVD',
             component: MVD
+        },
+        {
+            path: '/callback/:platform',
+            name: 'SignupCallback',
+            component: SignupCallback
         }
 
 
