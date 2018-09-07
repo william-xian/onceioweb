@@ -35,7 +35,6 @@ import SignupCallback from '@/components/SignupCallback'
 Vue.config.productionTip = false
 
 Vue.use(ElementUI);
-
 Vue.use(BootstrapVue);
 Vue.use(VueResource) 
 
@@ -60,11 +59,6 @@ let router = new VueRouter({
       children : [
         {
             path: '/',
-            name: 'Home',
-            component: Home
-        },
-        {
-            path: '/callback/:platform',
             name: 'Home',
             component: Home
         },
@@ -106,13 +100,15 @@ let router = new VueRouter({
   ]
 });
 
+Vue.prototype.$G = {
+    baseUrl:"http://www.onceio.top"
+};
 
 let app = new Vue({
     el: '#app',
     router,
     render: h => h(App)
 });
-
 Vue.use({
     app
 });

@@ -9,7 +9,7 @@ export default {
   name: 'ApiDocs',
   data () {
     return {
-      url: '/rs/docs.json'
+      url: this.$G.baseUrl+"/onceio/apis"
     }
   }
 }

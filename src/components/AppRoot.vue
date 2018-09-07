@@ -51,19 +51,19 @@
         <b-row>
           <b-col sm="2"><label for="input-default">账户:</label></b-col>
           <b-col sm="10">
-            <b-form-input id="input-default" type="text" placeholder="输入账户"></b-form-input>
+            <b-form-input id="input-default" type="text" v-model="account" placeholder="输入账户"></b-form-input>
           </b-col>
         </b-row>
 
         <b-row>
           <b-col sm="2"><label for="input-default">密码:</label></b-col>
           <b-col sm="10">
-            <b-form-input id="input-default" type="password" placeholder="输入密码"></b-form-input>
+            <b-form-input id="input-default" v-model="passwd" type="password" placeholder="输入密码"></b-form-input>
           </b-col>
         </b-row>
         <b-row class="d-block text-center">
-          <a class="btn btn-info" href="/user/signin">登录</a>
-          <a class="btn btn-info" href="/user/signup">注册</a>
+          <a class="btn btn-info" @click="signin()">登录</a>
+          <a class="btn btn-info" @click="signup()">注册</a>
         </b-row>
         <b-row class="d-block text-center">
           <span>其他账号登录</span>
@@ -84,26 +84,43 @@ export default {
   name: 'AppRoot',
   data () {
     return {
-      baseUrl:"http://www.onceio.top",
+      account:"",
+      passwd:"",
       alipayAuthUri:"",
       weiboAuthUri:""
     }
   },
   mounted() {
     var self = this;
-    this.$http.get(self.baseUrl+'/alipay/authurl').then(function(resp){
+    this.$http.get(self.$G.baseUrl+'/alipay/authurl').then(function(resp){
       self.alipayAuthUri = resp.body;
     });
-    this.$http.get(self.baseUrl+'/weibo/authurl').then(function(resp) {
+    this.$http.get(self.$G.baseUrl+'/weibo/authurl').then(function(resp) {
       self.weiboAuthUri = resp.body;
     });
   },
   methods: {
     showModal () {
-      this.$refs.myModalRef.show()
+      this.$refs.myModalRef.show();
     },
     hideModal () {
-      this.$refs.myModalRef.hide()
+      this.$refs.myModalRef.hide();
+    },
+    signin() {
+        var self = this;
+        this.$http.post(self.$G.baseUrl+'/user/signin',
+            {account:self.account,passwd:self.passwd}
+        ).then(function(resp){
+            console.log(resp);
+        });
+    },
+    signup() {
+        var self = this;
+        this.$http.post(self.$G.baseUrl+'/user/signup',
+            {account:self.account, passwd:self.passwd}
+        ).then(function(resp){
+            console.log(resp);
+        });
     }
   }
 }
@@ -128,7 +145,7 @@ export default {
 footer{
   width: 100%;
   height: 3em;
-  position:fixed;
+  position: fixed;
   bottom:0px;left:0px;
   background: #333;
   color: #000000;
