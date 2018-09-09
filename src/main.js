@@ -9,7 +9,7 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
 import BootstrapVue from 'bootstrap-vue'
-import VueResource from 'vue-resource';
+import Axios from 'axios';
 
 
 import 'bootstrap/dist/css/bootstrap.css'
@@ -36,7 +36,6 @@ Vue.config.productionTip = false
 
 Vue.use(ElementUI);
 Vue.use(BootstrapVue);
-Vue.use(VueResource) 
 
 Vue.component('MBook', MBook);
 Vue.component('ApiDoc', ApiDoc);
@@ -101,8 +100,50 @@ let router = new VueRouter({
 });
 
 Vue.prototype.$G = {
-    baseUrl:"http://www.onceio.top"
+    user : {}
 };
+
+var $http = Axios;
+Axios.defaults.baseURL = 'http://www.onceio.top';
+// Axios.defaults.headers.common['Authorization'] = Vue.prototype.$G.user.userId;
+Axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
+/*
+Axios.interceptors.request.use(function(config){
+    return config;
+  },function(err) {
+    return Promise.reject(err);
+});
+*/
+
+Axios.interceptors.response.use(function(res){
+    //在这里对返回的数据进行处理
+    if(res.data.ERROR != null) {
+        alert(res.data.ERROR);
+        throw res.data.ERROR;
+    }else {
+        return res;
+    }
+  },function(err){
+      alert(err);
+  })
+  
+
+Vue.prototype.$http = $http
+
+Vue.prototype.setCookie = function (name, value, days) {
+
+    var d = new Date;
+    d.setTime(d.getTime() + 24*60*60*1000*days);
+    window.document.cookie = name + "=" + value + ";path=/;expires=" + d.toGMTString();
+};
+Vue.prototype.getCookie= function (name) {
+    var v = window.document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+    return v ? v[2] : null;
+};
+
+Vue.prototype.deleteCookie = function (name) {
+    this.set(name, '', -1);
+}
 
 let app = new Vue({
     el: '#app',

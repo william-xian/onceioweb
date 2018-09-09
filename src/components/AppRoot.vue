@@ -26,6 +26,7 @@
           <b-nav-item-dropdown right>
           <!-- Using button-content slot -->
           <template slot="button-content">
+            {{nickname}}
             <em>...</em>
           </template>
           <b-dropdown-item @click="showModal">登录</b-dropdown-item>
@@ -85,6 +86,7 @@ export default {
   data () {
     return {
       account:"",
+      nickname:"",
       passwd:"",
       alipayAuthUri:"",
       weiboAuthUri:""
@@ -92,10 +94,10 @@ export default {
   },
   mounted() {
     var self = this;
-    this.$http.get(self.$G.baseUrl+'/alipay/authurl').then(function(resp){
+    this.$http.get('/alipay/authurl').then(function(resp){
       self.alipayAuthUri = resp.body;
     });
-    this.$http.get(self.$G.baseUrl+'/weibo/authurl').then(function(resp) {
+    this.$http.get('/weibo/authurl').then(function(resp) {
       self.weiboAuthUri = resp.body;
     });
   },
@@ -108,18 +110,27 @@ export default {
     },
     signin() {
         var self = this;
-        this.$http.post(self.$G.baseUrl+'/user/signin',
+        this.$http.post('/user/signin',
             {account:self.account,passwd:self.passwd}
         ).then(function(resp){
-            console.log(resp);
+          var data = resp.data;
+          if(data.a != null && data.b != null) {
+              var user = Object.assign(data.a,data.b);
+              self.$G.user = user;
+              self.nickname = user.nickname;
+              self.setCookie('userId',user.userId,1);
+              self.setCookie('accessToken',user.accessToken,1);
+              self.$router.push({path: '/signin',params: user});
+              self.hideModal();
+          }
         });
     },
     signup() {
         var self = this;
-        this.$http.post(self.$G.baseUrl+'/user/signup',
+        this.$http.post('/user/signup',
             {account:self.account, passwd:self.passwd}
         ).then(function(resp){
-            console.log(resp);
+            alert("注册成功，请登录！");
         });
     }
   }

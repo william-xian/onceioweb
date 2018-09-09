@@ -27,46 +27,45 @@ export default {
   name: 'MBook',
   props: ['dir','files','src'],
   data () {
-  	var d = {
-  		book: {},
-  		content : '',
-  		defaultProps: {
+      var d = {
+          book: {},
+          content : '',
+          defaultProps: {
           children: 'children',
           label: 'name'
         }
-  	}
-  	return d;
+      }
+      return d;
  },
  mounted() {
-	var self = this;
-	axios.get(this.dir+'config.json')
-	  		.then(function(res){ 
-	          self.book =  res.data;
-			}).then(function(){
-
-        axios.get(self.dir+self.book.children[0].src)
+    var self = this;
+    self.$http.get(this.dir+'config.json')
+              .then(function(res){ 
+              self.book =  res.data;
+        }).then(function(){
+        self.$http.get(self.dir+self.book.children[0].src)
           .then(function(res){ 
               self.content =  res.data;
         });
 
-	    });
+    });
  },
  components: {
- 	VueMarkdown
+     VueMarkdown
  },methods: {
- 	open:function(item) {
- 		var src =  item.src;
- 		if(src != null && src != "")
- 		{
+     open:function(item) {
+         var src =  item.src;
+         if(src != null && src != "")
+         {
       var self = this;
-		  	axios.get(self.dir+src)
-		  		.then(function(res){ 
-		          self.content =  res.data;
-				},
-				function(res){  
-		    });
- 		}
- 	}
+              axios.get(self.dir+src)
+                  .then(function(res){ 
+                  self.content =  res.data;
+                },
+                function(res){  
+            });
+         }
+     }
  }
 }
 </script>

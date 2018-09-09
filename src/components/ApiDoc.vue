@@ -19,7 +19,7 @@
           </div>
           <div class="panel-body">
             <form id="frm-params" class="form-horizontal" role="form" :action="curapi.api" :method="curapi.methods">
-              <div v-for="(p,name) in curapi.params">
+              <div v-bind:key="(p,name)"  v-for="(p,name) in curapi.params">
                 <div v-if="name != ':type'" class="form-group row">
                   <label :for="name" class="col-sm-2 col-form-label">{{name}}</label>
                   <div class="col-sm-8">
@@ -27,7 +27,7 @@
                   </div>
                 </div>
 
-                <div v-if="name == ':type'" v-for="(sp,sname) in model[p]">
+                <div v-if="name == ':type'" v-bind:key="(sp,sname)" v-for="(sp,sname) in model[p]">
                   <div v-if="sname.indexOf(':') < 0" class="form-group row">
                     <label :for="sname" class="col-sm-2 col-form-label">{{sname}}</label>
                     <div class="col-sm-8">
@@ -39,7 +39,7 @@
               </div>
               <div>
                 <a class="btn btn-info col-sm-1" :href="curapi.api" target="_blank">转到</a>
-                <a class="btn btn-success col-sm-1" :href="curapi.api"　@click="submit">提交</a>
+                <a class="btn btn-success col-sm-1" :href="curapi.api" @click="submit">提交</a>
               </div>
             </form>
           </div>
@@ -52,7 +52,7 @@
                 <h3 class="panel-title">返回值：{{curapi.returnType[':type']}}</h3>
             </div>
             <div class="panel-body">
-              <pre v-for="ep in curapi.extractReturnType">{{JSON.stringify(ep,null,2)}}</pre>
+              <pre v-bind:key="ep" v-for="ep in curapi.extractReturnType">{{JSON.stringify(ep,null,2)}}</pre>
             </div>
         </div>
 
@@ -69,7 +69,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 export default {
   name: 'ApiDoc',
   props: ['url','target'],
@@ -96,31 +95,30 @@ export default {
         this.curapi.extractReturnType = [];
         var extractReturnType = this.curapi.extractReturnType;
         var rt = sa.returnType[':type'];
+        var l,r,m;
         do{
-          console.log('rt-->'+ rt);
-          var l = rt.indexOf('<');
-          var r = rt.lastIndexOf('>');
-          if(l　<　0){
+          l = rt.indexOf('<');
+          r = rt.lastIndexOf('>');
+          if(l<0){
             if(rt != this.model[rt]) {
-              var m = {};
+              m = {};
               m[rt] = this.model[rt];
               extractReturnType.push(m);
             }
             break;
           }
           var rtContainer = rt.substr(0,l);
-          var m = {};
+          m = {};
           m[rtContainer] = this.model[rtContainer];
           extractReturnType.push(m);
           rt = rt.substr(l+1,r-l-1);
-
-        }while(true);
+        }while(l < rt.length);
       }
     },
     fresh : function() {
       var self = this;
       this.group = this.target;
-      axios.get(this.apiurl).then(function(resp) {
+      this.$http.get(this.apiurl).then(function(resp) {
         self.model = resp.data.model;
         delete resp.data['model'];
         self.apis= resp.data;
