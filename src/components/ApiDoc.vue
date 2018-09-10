@@ -19,7 +19,7 @@
           </div>
           <div class="panel-body">
             <form id="frm-params" class="form-horizontal" role="form" :action="curapi.api" :method="curapi.methods">
-              <div v-bind:key="(p,name)"  v-for="(p,name) in curapi.params">
+              <div v-bind:key="name"  v-for="(p,name) in curapi.params">
                 <div v-if="name != ':type'" class="form-group row">
                   <label :for="name" class="col-sm-2 col-form-label">{{name}}</label>
                   <div class="col-sm-8">
@@ -27,7 +27,7 @@
                   </div>
                 </div>
 
-                <div v-if="name == ':type'" v-bind:key="(sp,sname)" v-for="(sp,sname) in model[p]">
+                <div v-if="name == ':type'" v-bind:key="sname" v-for="(sp,sname) in model[p]">
                   <div v-if="sname.indexOf(':') < 0" class="form-group row">
                     <label :for="sname" class="col-sm-2 col-form-label">{{sname}}</label>
                     <div class="col-sm-8">

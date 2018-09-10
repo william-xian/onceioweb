@@ -1,7 +1,7 @@
 <template>
 	<div>
     <form action="">
-      <MVDItem  :model='model' v-for='model in data'/>
+      <MVDItem v-bind:key="model" :model='model' v-for='model in data'/>
       <button>Submit</button>   
     </form>
 	</div>
