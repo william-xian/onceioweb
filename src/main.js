@@ -98,22 +98,27 @@ let router = new VueRouter({
     }
   ]
 });
-
-Vue.prototype.$G = {
+var $G =  {
     user : {}
 };
+Vue.prototype.$G = $G;
 
 var $http = Axios;
 Axios.defaults.baseURL = 'http://www.onceio.top';
 // Axios.defaults.headers.common['Authorization'] = Vue.prototype.$G.user.userId;
 Axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
-/*
+Axios.defaults.withCredentials = true;
+
 Axios.interceptors.request.use(function(config){
+    if($G.user.userId) {
+        config.headers.common['Cookie'] = 'userId='+ $G.user.userId + '; accessToken=' + $G.user.accessToken;
+        console.log(JSON.stringify(config,null,4));
+    }
     return config;
   },function(err) {
     return Promise.reject(err);
 });
-*/
+
 
 Axios.interceptors.response.use(function(res){
     //在这里对返回的数据进行处理

@@ -26,7 +26,7 @@
           <b-nav-item-dropdown right>
           <!-- Using button-content slot -->
           <template slot="button-content">
-            {{nickname}}
+            {{user.nickname}}
             <em>...</em>
           </template>
           <b-dropdown-item @click="showModal">登录</b-dropdown-item>
@@ -86,8 +86,8 @@ export default {
   data () {
     return {
       account:"",
-      nickname:"",
       passwd:"",
+      user: {},
       alipayAuthUri:"",
       weiboAuthUri:""
     }
@@ -100,6 +100,16 @@ export default {
     this.$http.get('/weibo/authurl').then(function(resp) {
       self.weiboAuthUri = resp.body;
     });
+    if(self.$G.user == null) {
+      var user = {};
+      user.userId = self.getCookie('userId');
+      user.accessToken = self.getCookie('accessToken');
+      user.nickname = self.getCookie('nickname');
+      if(user.userId != null && user.accessToken) {
+        self.$G.user = user;
+        self.user = user;
+      }
+    }
   },
   methods: {
     showModal () {
@@ -117,9 +127,10 @@ export default {
           if(data.a != null && data.b != null) {
               var user = Object.assign(data.a,data.b);
               self.$G.user = user;
-              self.nickname = user.nickname;
+              self.user = user;
               self.setCookie('userId',user.userId,1);
               self.setCookie('accessToken',user.accessToken,1);
+              self.setCookie('nickname',user.nickname,1);
               self.$router.push({path: '/signin',params: user});
               self.hideModal();
           }
