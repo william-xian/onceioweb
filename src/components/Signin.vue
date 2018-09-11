@@ -55,7 +55,7 @@ export default {
         var self = this;
         if(self.query) {
           self.topicIds = [self.topicId];
-          self.$http.get('/neure_relation/searchDepend',{topicIds:self.topicIds,target:self.target})
+          self.$http.get('/neure_relation/searchDepend',{params:{topicIds:self.topicIds,target:self.target}})
           .then(function(res){
             self.data = JSON.stringify(res.data);
           });

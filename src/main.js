@@ -32,6 +32,10 @@ import Signin from '@/components/Signin'
 
 import SignupCallback from '@/components/SignupCallback'
 
+import echarts from 'echarts'
+ 
+Vue.prototype.$echarts = echarts
+
 Vue.config.productionTip = false
 
 Vue.use(ElementUI);
@@ -111,8 +115,8 @@ Axios.defaults.withCredentials = true;
 
 Axios.interceptors.request.use(function(config){
     if($G.user.userId) {
-        config.headers.common['Cookie'] = 'userId='+ $G.user.userId + '; accessToken=' + $G.user.accessToken;
-        console.log(JSON.stringify(config,null,4));
+        config.headers.common['userId'] = $G.user.userId 
+        config.headers.common['accessToken'] = $G.user.accessToken;
     }
     return config;
   },function(err) {
