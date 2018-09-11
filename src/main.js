@@ -32,7 +32,7 @@ import Signin from '@/components/Signin'
 
 import SignupCallback from '@/components/SignupCallback'
 
-import echarts from 'echarts'
+import echarts from 'echarts';
  
 Vue.prototype.$echarts = echarts
 
