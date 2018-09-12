@@ -1,13 +1,14 @@
 <template>
 	<div>
-    <div>
-      <el-switch v-model="query" active-text="查询" inactive-text="输入">
-      </el-switch>
-      <el-button icon="el-icon-search" @click="onSubmit">提交</el-button>
-    </div>
-    <div class="input-group">
-      <label>话题：</label>
-      <el-select v-model="topicId" placeholder="请选择">
+    <el-form>
+    <el-form-item label="操作：">
+      <el-button icon="el-icon-search" @click="onQuery">查询</el-button>
+      <el-button icon="el-icon-check" @click="onSubmit">提交</el-button>
+      <el-button v-if="hover.relation" type="danger" icon="el-icon-delete" @click="deleteRelation">{{hover.name}}</el-button>
+    </el-form-item>
+
+    <el-form-item label="话题：">
+      <el-select v-model="topicIds" multiple placeholder="请选择">
         <el-option
           v-for="item in topics"
           :key="item.id"
@@ -15,18 +16,13 @@
           :value="item.id">
         </el-option>
       </el-select>
-    </div>
-    <div class="input-group">
-      <label>关系：</label>
-      <el-input v-if="query" type="text" placeholder="输入节点" v-model="target">
-      </el-input>          
-    </div>
-
-    <div v-if="!query">
-      <el-input type="textarea" :rows="2" placeholder="A > B; B < A; A >< B; A <> B; A = B; A,B > C;" v-model="relation">
-      </el-input>
-    </div>
-    <div id="myChart" :style="{width: '100%', height: '100%'}"></div>
+    </el-form-item>
+    <el-form-item label="节点|关系：">
+        <el-input type="textarea" :rows="1" placeholder="A > B; B < A; A ! B; A : B; A = B; A,B > C;" v-model="inputData">
+        </el-input>    
+    </el-form-item>
+    </el-form>
+    <div id="myChart" :style="{width: '100%', height: '400px'}"></div>
   </div>
 </template>
 
@@ -36,11 +32,10 @@ export default {
   data () {
     return {
       query: true,
-      target: "",
       topics: [],
-      topicId: null,
       topicIds: null,
-      relation: "",
+      inputData: "",
+      hover:{},
       data: {neures:[],relations:[]}
     }
   },
@@ -54,76 +49,127 @@ export default {
   methods : {
       onSubmit :function() {
         var self = this;
-        if(self.query) {
-          self.topicIds = [self.topicId];
-          self.$http.get('/neure_relation/searchDepend',{params:{topicIds:self.topicIds,target:self.target}})
-          .then(function(res){
-            self.data = res.data;
-            self.drawLine(res.data);
-          });
-          
-        }else {
-          self.$http.post('/neure_relation/push',{topicId:self.topicId,relation:self.relation})
-          .then(function(res){
-            self.data = JSON.stringify(res.data);
+        self.$http.post('/neure_relation/push',{topicId:self.topicIds[0],relation:self.inputData})
+        .then(function(res){
+          alert('添加成功');
+        });
+      },
+      onQuery :function() {
+        var self = this;
+        self.$http.get('/neure_relation/searchDepend',{params:{topicIds:self.topicIds,target:self.inputData}})
+        .then(function(res){
+          self.data = res.data;
+          self.drawLine(res.data);
+        });
+      },
+      deleteRelation(){
+        var self = this;
+        self.$http.get('neure_relation/deleteRelation', {
+          params : { ids: JSON.stringify([self.hover.relation.id]) }
+        }).then(function(res) {
+          alert('成功删除：' + self.hover.name);
+          self.hover = {};
+        });
+      },
+      dataConvert(data){
+        var neureMap = new Map();
+        var combMap = new Map();
+        data.neures.forEach(function(neure){
+          neure.symbolSize = 1;
+          neureMap.set(neure.id, neure);
+        });
+        data.relations.forEach(function(item){
+          if(!combMap.has(item.comb)) {
+            combMap.set(item.comb,[item.dependId]);
+          }else {
+            combMap.get(item.comb).push(item.dependId);
+          }
+          neureMap.get(item.dependId).symbolSize++;
+          neureMap.get(item.deduceId).symbolSize++;
+        });
+        data.neureMap = neureMap;
+        data.combMap = combMap;
+      },
+      getNeureNamesByComb(data,comb){
+        var dependIds = data.combMap.get(comb);
+        var names = [];
+        if(dependIds != null) {
+          dependIds.forEach(function(id){
+            names.push(data.neureMap.get(id).name);
           });
         }
+        return names.join(', ');
       },
       drawLine(data){
+        var self = this;
         // 基于准备好的dom，初始化echarts实例
         let myChart = this.$echarts.init(document.getElementById('myChart'));
-
+        self.dataConvert(data);
         /**data-begin */
         var graph = {};
         graph.nodes = [];
         graph.links = [];
-        var categories = [{name:'基元'}];
-        var categoriesMap = new Map();
+        var categories = [{name: '红线'},{name: '正常'}];
+        var lineStyles= [{color: "#000000", type: "solid"},{color: "#ff0000", type: "dashed"}];
         data.relations.forEach(function(item){
-          if(!categoriesMap.has(item.comb)) {
-            categoriesMap.set(item.comb,{names:[item.dependId]});
-          }else {
-            categoriesMap.get(item.comb).names.push(item.dependId);
+          var lineStyle = lineStyles[0];
+          if(item.relation == '!') {
+            lineStyle = lineStyles[1];
           }
-        });
-        data.relations.forEach(function(item){
-          var c = categoriesMap.get(item.comb)||{names:[]};
           graph.links.push({
-            id: item.id+'',
-            name: c.names.join(',')+' - '+item.relation,
-            source: item.dependId+'',
-            target: item.deduceId+''
+            id: item.id + '',
+            value: item.relation,
+            source: item.dependId + '',
+            target: item.deduceId + '',
+            lineStyle: lineStyle
           });
         });
        data.neures.forEach(function(neure){
           graph.nodes.push({
-            id: neure.id+'',
-            name: '' + neure.name,
-            brief: neure.brief,
-            "symbolSize":10,
+            id: neure.id + '',
+            name: neure.name + '',
+            symbolSize: neure.symbolSize*2+10,
             label : {
                 normal: {
                     show: true
                 }
             },
-            category : 0
+            category : 1
           });
         });
         /**data-end */
         var option = {
             title: {
-                text: 'NR',
                 subtext: 'Default layout',
                 top: 'bottom',
                 left: 'right'
             },
-            tooltip: {},
+            tooltip: {
+              formatter : function(params,ticket,callback) {
+                if(params.dataType == 'edge') {
+                  var r = data.relations[params.dataIndex];
+                  var t = data.neureMap.get(r.deduceId);
+                  var name = null;
+                  if(r.relation == '<') {
+                     name =  self.getNeureNamesByComb(data,r.comb) + ' > ' + t.name;
+                  }else {
+                     name = self.getNeureNamesByComb(data,r.comb) + ' ' + r.relation + ' ' + t.name;
+                  }
+                  self.hover = {relation: r, name: name};
+                  return name;
+                } else if(params.dataType == 'node'){
+                  var d = data.neures[params.dataIndex];
+                  self.hover = {neure:d, name: d.name};
+                  self.inputData = d.name;
+                  return d.name + " : " + (d.brief ||''); 
+                }
+              }
+            },
             legend: [{
                 // selectedMode: 'single',
                 data: categories.map(function (a) {
-                    return a.name;
+                    //return a.name;
                 })
-                
             }],
             animationDuration: 1500,
             animationEasingUpdate: 'quinticInOut',
