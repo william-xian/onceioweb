@@ -48,13 +48,14 @@ export default {
     }
     self.$http.get('/topic'+cnd).then(function(res){
       var set = new Set();
-      res.data.forEach(function(item){
+      var data = res.data.data||[];
+      data.forEach(function(item){
         if(item.ownner == userId) {
           set.add(item.name);
         }
       });
       self.topics = [];
-      res.data.forEach(function(item){
+      data.forEach(function(item){
         if(item.ownner == userId || !set.has(item.name)){
           self.topics.push(item);
         }
