@@ -95,19 +95,19 @@ export default {
   mounted() {
     var self = this;
     this.$http.get('/alipay/authurl').then(function(resp){
-      self.alipayAuthUri = resp.body;
+      self.alipayAuthUri = resp.data;
     });
     this.$http.get('/weibo/authurl').then(function(resp) {
-      self.weiboAuthUri = resp.body;
+      self.weiboAuthUri = resp.data;
     });
-    if(self.$G.user == null) {
+    if(self.$G.user.userId == null) {
       var user = {};
       user.userId = self.getCookie('userId');
       user.accessToken = self.getCookie('accessToken');
       user.nickname = self.getCookie('nickname');
       if(user.userId != null && user.accessToken) {
         self.$G.user = user;
-        self.user = user;
+        self.user.nickname = user.nickname;
       }
     }
   },
@@ -131,7 +131,7 @@ export default {
               self.setCookie('userId',user.userId,1);
               self.setCookie('accessToken',user.accessToken,1);
               self.setCookie('nickname',user.nickname,1);
-              self.$router.push({path: '/signin',params: user});
+              self.$router.push({path: '/relation',params: user});
               self.hideModal();
           }
         });

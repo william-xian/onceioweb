@@ -24,11 +24,14 @@ import MBook from '@/components/MBook'
 import ApiDoc from '@/components/ApiDoc'
 
 import MVDItem from '@/components/MVDItem'
+
 import MVD from '@/components/MVD'
 
 import ApiDocs from '@/components/ApiDocs'
 
 import Signin from '@/components/Signin'
+
+import Relation from '@/components/Relation'
 
 import SignupCallback from '@/components/SignupCallback'
 
@@ -44,7 +47,8 @@ Vue.use(BootstrapVue);
 Vue.component('MBook', MBook);
 Vue.component('ApiDoc', ApiDoc);
 Vue.component('ApiDocs', ApiDocs);
-Vue.component('Signin',Signin)
+Vue.component('Signin',Signin);
+Vue.component('Relation',Relation);
 Vue.component('MVDItem',MVDItem);
 Vue.component('MVD',MVD);
 Vue.component('SignupCallback',SignupCallback);
@@ -84,6 +88,11 @@ let router = new VueRouter({
             path: '/signin',
             name: 'Signin',
             component: Signin
+        },
+        {
+            path: '/relation',
+            name: 'Relation',
+            component: Relation
         },
         {
             path: '/mvd',

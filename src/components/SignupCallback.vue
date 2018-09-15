@@ -32,7 +32,7 @@ export default {
     }else if(self.platform == 'weibo'){
       url = self.platform+ "/callback?code=" + self.code;
     }
-    url = self.$G.baseUrl + "/" + url;
+    url = "/" + url;
     if(url) {
       self.$http.get(url)
         .then(function(res){ 
