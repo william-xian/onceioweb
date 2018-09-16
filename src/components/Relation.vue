@@ -67,7 +67,7 @@ export default {
       onSubmit :function() {
         var self = this;
         var topicId = self.topicIds[0];
-        if(typeof(topicId)=='string') {
+        if(typeof(topicId)=='string' && topicId.match(/[0-9]+/)) {
           self.$http.post('/topic',{ "name": topicId, "genre": 0, "ownner": self.$G.user.userId})
           .then(function(res) {
             topicId = res.data.id;

@@ -11,6 +11,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import BootstrapVue from 'bootstrap-vue'
 import Axios from 'axios';
 
+import Protobuf from 'protobufjs';
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -149,7 +150,6 @@ Axios.interceptors.response.use(function(res){
 Vue.prototype.$http = $http
 
 Vue.prototype.setCookie = function (name, value, days) {
-
     var d = new Date;
     d.setTime(d.getTime() + 24*60*60*1000*days);
     window.document.cookie = name + "=" + value + ";path=/;expires=" + d.toGMTString();
@@ -171,3 +171,4 @@ let app = new Vue({
 Vue.use({
     app
 });
+

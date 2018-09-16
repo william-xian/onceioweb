@@ -52,14 +52,14 @@
         <b-row>
           <b-col sm="2"><label for="input-default">账户:</label></b-col>
           <b-col sm="10">
-            <b-form-input id="input-default" type="text" v-model="account" placeholder="输入账户"></b-form-input>
+            <b-form-input id="input-default" type="text" pattern="[a-zA-Z-_0-9]{4,}" v-model="account" placeholder="输入账户"></b-form-input>
           </b-col>
         </b-row>
 
         <b-row>
           <b-col sm="2"><label for="input-default">密码:</label></b-col>
           <b-col sm="10">
-            <b-form-input id="input-default" v-model="passwd" type="password" placeholder="输入密码"></b-form-input>
+            <b-form-input id="input-default" v-model="passwd" type="password" pattern="[^ ]{6,}" placeholder="输入密码"></b-form-input>
           </b-col>
         </b-row>
         <b-row class="d-block text-center">
