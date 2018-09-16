@@ -70,7 +70,9 @@ export default {
         if(!topicId.match(/[0-9]+/)) {
           self.$http.post('/topic',{ "name": topicId, "genre": 0, "ownner": self.$G.user.userId})
           .then(function(res) {
+            self.topics.shift();
             topicId = res.data.id;
+            self.topics.unshift(res.data);
             if(topicId != null) {
               self.$http.post('/neure_relation/push',{topicId:topicId,relation:self.inputData})
                 .then(function(res){
