@@ -5,6 +5,7 @@
       <el-button icon="el-icon-search" @click="onQuery">查询</el-button>
       <el-button icon="el-icon-check" @click="onSubmit">提交</el-button>
       <el-button v-if="hover.relation" type="danger" icon="el-icon-delete" @click="deleteRelation">{{hover.name}}</el-button>
+      <el-button v-if="hover.neure" type="danger" icon="el-icon-delete" @click="deleteNeure">{{hover.name}}</el-button>
     </el-form-item>
 
     <el-form-item label="话题：">
@@ -106,6 +107,13 @@ export default {
           self.hover = {};
         });
       },
+      deleteNeure(){
+        var self = this;
+        self.$http.delete('neure/[' +self.hover.neure.id+']').then(function(res) {
+          alert('成功删除：' + self.hover.name);
+          self.hover = {};
+        });
+      },
       dataConvert(data){
         var neureMap = new Map();
         var combMap = new Map();
@@ -146,18 +154,26 @@ export default {
         graph.links = [];
         var categories = [{name: '红线'},{name: '正常'}];
         var lineStyles= [{color: "#000000", type: "solid"},{color: "#ff0000", type: "dashed"}];
+        var symbols= [['circle', 'circle'],['circle', 'arrow'],['arrow', 'arrow']];
         data.relations.forEach(function(item){
           var lineStyle = lineStyles[0];
+          var symbol = symbols[1];
           if(item.relation == '!') {
             lineStyle = lineStyles[1];
+            symbol = symbols[0];
+          }else if(item.relation == ':' || item.relation == '=') {
+            symbol = symbols[2];
           }
+          
           graph.links.push({
             id: item.id + '',
             value: item.relation,
             source: item.dependId + '',
             target: item.deduceId + '',
-            lineStyle: lineStyle
+            lineStyle: lineStyle,
+            symbol: symbol,
           });
+
         });
        data.neures.forEach(function(neure){
           graph.nodes.push({
