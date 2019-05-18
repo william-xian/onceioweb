@@ -127,8 +127,8 @@ export default {
           }else {
             combMap.get(item.comb).push(item.dependId);
           }
-          neureMap.get(item.dependId).symbolSize++;
-          neureMap.get(item.deduceId).symbolSize++;
+          (neureMap.get(item.dependId)||{"symbolSize":0}).symbolSize++;
+          (neureMap.get(item.deduceId)||{"symbolSize":0}).symbolSize++;
         });
         data.neureMap = neureMap;
         data.combMap = combMap;

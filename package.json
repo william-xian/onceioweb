@@ -13,6 +13,7 @@
     "echarts": "^4.1.0",
     "element-ui": "^2.4.1",
     "iview": "^2.14.2",
+    "protobufjs": "^6.8.8",
     "vue": "^2.5.16",
     "vue-markdown": "^2.2.4",
     "vue-router": "^3.0.1"
