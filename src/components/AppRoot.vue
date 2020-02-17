@@ -40,8 +40,7 @@
       <router-view/>
     </div>
     <footer style="padding-top:1em;">
-      &copy;Copyright 2018 OnceIO, Inc. All Rights Reserved.
-      <a href="#/terms">Terms of Use</a>
+      <a href="http://www.beian.miit.gov.cn">陕ICP备19012376号</a> &copy;Copyright 2018 OnceIO, Inc. All Rights Reserved.<a href="#/terms">Terms of Use</a>
     </footer>
 
 <div>
